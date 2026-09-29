@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورقة عمل تفاعلية - قصة علامة تعجب</title>
+    <style>
+        :root {
+            --primary-color: #005691;
+            --secondary-color: #48a23f;
+            --accent-color: #0082ca;
+            --bg-color: #f4f7f9;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            direction: rtl;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        .header img {
+            max-width: 220px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            margin: 5px 0;
+            font-size: 26px;
+        }
+
+        .header h2 {
+            color: var(--secondary-color);
+            margin: 5px 0;
+            font-size: 20px;
+            font-weight: normal;
+        }
+
+        .student-info {
+            background-color: #eef6fc;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .student-info label {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .student-info input {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 15px;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .summary-box {
+            background-color: #f9f9f9;
+            border-right: 5px solid var(--secondary-color);
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+            line-height: 1.7;
+        }
+
+        .summary-box h3 {
+            color: var(--secondary-color);
+            margin-top: 0;
+        }
+
+        .section-title {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .question-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+        }
+
+        .question-title {
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #2c3e50;
+        }
+
+        .options label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .options label:hover {
+            background-color: #f0f4f8;
+        }
+
+        .options input {
+            margin-left: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #3b8733;
+        }
+
+        /* Certificate Styles */
+        #certificate {
+            display: none;
+            margin-top: 40px;
+            padding: 40px;
+            border: 10px double var(--primary-color);
+            background: #fff;
+            text-align: center;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .cert-header {
+            font-size: 28px;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .cert-body {
+            font-size: 18px;
+            line-height: 2;
+            margin-bottom: 30px;
+        }
+
+        .cert-highlight {
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 22px;
+            text-decoration: underline;
+        }
+
+        .cert-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 50px;
+            padding: 0 30px;
+        }
+
+        .signature {
+            text-align: center;
+        }
+
+        .sig-line {
+            font-family: 'Brush Script MT', cursive, sans-serif;
+            font-size: 24px;
+            color: var(--primary-color);
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+        }
+
+        .print-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #certificate, #certificate * {
+                visibility: visible;
+            }
+            #certificate {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                display: block !important;
+                border: 5px solid var(--primary-color);
+            }
+            .print-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- الهيدر وشعار المدرسة -->
+    <div class="header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Applied_Technology_Schools_logo.png" alt="شعار مدارس التكنولوجيا التطبيقية" onerror="this.src='https://via.placeholder.com/200x80?text=ATS+Logo'">
+        <h1>مدارس التكنولوجيا التطبيقية</h1>
+        <h2>ورقة عمل تفاعلية: قصة "علامة تعجب" - للكاتبة فاطمة الكعبي</h2>
+    </div>
+
+    <!-- بيانات الطالب -->
+    <div class="student-info">
+        <label for="student-name">اسم الطالب/ـة الثلاثي:</label>
+        <input type="text" id="student-name" placeholder="أدخل اسمك الثلاثي هنا..." required>
+
+        <label for="student-class">الشعبة / الصف:</label>
+        <input type="text" id="student-class" placeholder="مثال: 11-A" required>
+    </div>
+
+    <!-- ملخص القصة -->
+    <div class="summary-box">
+        <h3>📖 ملخص القصة:</h3>
+        <p>
+            تتناول القصة مشاعر امرأة حامل تنتظر دورها في عيادة بالمستشفى لصرف الدواء، حيث تشعر بالبطء الشديد للوقت والإرهاق. تلتقي المرأة بامرأة عجوز ترتدي برقعاً أخضر، تبدأ بالحديث والتذمر من نظام الأرقام والتزاحم، وتوجه انتقادات لاذعة للمارين. تُثير هذه العجوز بحديثها وحضورها ضيق المرأة الحامل التي تعاني في الأصل من مشاعر الوحدة والجفاء العاطفي، بسبب غياب زوجها وانشغاله عنها بالسائق والجريدة، واقتصار اهتمامه على السؤال التقليدي: "ولد أم بنت؟". تنتهي القصة بمشهد يمر فيه زوجان متحابان، فتعلق العجوز بتهكم وسخرية: "وين احنا؟ في باريس!"، مما يُشعر البطلة بالصدمة والذهول لتغادر المكان دون أي تعليق، معبّرة عن حالة من التعجب والاستنكار لواقع الجفاف العاطفي والنظرة المجتمعية السلبية.
+        </p>
+    </div>
+
+    <form id="worksheet-form">
+        <!-- الجزء الأول: اختيار من متعدد -->
+        <div class="section-title">أولاً: الاختيار من متعدد (15 سؤالاً)</div>
+
+        <div class="question-card">
+            <div class="question-title">1. كاتبة قصة "علامة تعجب" هي:</div>
+            <div class="options">
+                <label><input type="radio" name="q1" value="a"> ميسون صقر</label>
+                <label><input type="radio" name="q1" value="b"> فاطمة الكعبي</label>
+                <label><input type="radio" name="q1" value="c"> باسيمة يونس</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-title">2. المكان الرئيسي الذي تدور فيه أحداث القصة هو:</div>
+            <div class="options">
+                <label><input type="radio" name="q2" value="a"> المنزل</label>
+                <label><input type="radio" name="q2" value="b"> المستشفى (قاعة الانتظار أمام الصيدلية)</label>
+                <label><input type="radio" name="q2" value="c"> حدائق باريس</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-title">3. شبهت الراوية الوقت في بداية القصة بـ:</div>
+            <div class="options">
+                <label><input type="radio" name="q3" value="a"> القطار السريع</label>
+                <label><input type="radio" name="q3" value="b"> سلحفاة تحبو بكسل</label>
+                <label><input type="radio" name="q3" value="c"> الطائر المحلق</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-title">4. كانت المرأة العجوز ترتدي:</div>
+            <div class="options">
+                <label><input type="radio" name="q4" value="a"> برقعاً أخضر لامعاً</label>
+                <label><input type="radio" name="q4" value="b"> نقاباً أسود</label>
+                <label><input type="radio" name="q4" value="c"> ثوباً أحمر</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-title">5. معنى كلمة "أردفت" في سياق النص هو:</div>
+            <div class="options">
+                <label><input type="radio" name="q5" value="a"> أسرعت</label>
+                <label><input type="radio" name="q5" value="b"> أتبعت وأضافت في الحديث</label>
+                <label><input type="radio" name="q5" value="c"> سكتت</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-title">6. معنى كلمة "حفنة" كما وردت في "حفنة فيتامينات":</div>
+            <div class="options">
+                <label><input type="radio" name="q6" value="a"> ملء الكف</label>
+                <label><input type="radio" name="q6" value="b"> صندوق كبير</label>
+                <label><input type="radio" name="q6" value="c"> زجاجة صغيرة</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-title">7. المعنى المعجمي لكلمة "تبرم" هو:</div>
+            <div class="options">
+                <label><input type="radio" name="q7" value="a"> الضجر والسخط</label>
+                <label><input type="radio" name="q7" value="b"> الفرح والسرور</label>
+                <label><input type="radio" name="q7" value="c"> الهدوء والسكينة</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-title">8. الضمير ونوع الراوي في القصة هو:</div>
+            <div class="options">
+                <label><input type="radio" name="q8" value="a"> راوٍ خارجي متكلم</label>
+                <label><input type="radio" name="q8" value="b"> راوٍ داخلي (شخصية من ضمن الأحداث)</label>
+                <label><input type="radio" name="q8" value="c"> راوٍ غائب عليم بكل شيء</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-title">9. الصورة البيانية في "كانت الصحيفة حائطاً بيننا":</div>
+            <div class="options">
+                <label><input type="radio" name="q9" value="a"> تشبيه بليغ يدل على الفجوة والانعزال</label>
+                <label><input type="radio" name="q9" value="b"> استعارة مكنية تدل على القوة</label>
+                <label><input type="radio" name="q9" value="c"> مجاز مرسل</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-title">10. العبارة التي تدل على استخدام تقنية الاسترجاع (Flashback) هي:</div>
+            <div class="options">
+                <label><input type="radio" name="q10" value="a"> "نظرات العجوز تستفزني"</label>
+                <label><input type="radio" name="q10" value="b"> "لديك السائق يوصلك أينما تريدين... كانت الصحيفة حائطاً بيننا"</label>
+                <label><input type="radio" name="q10" value="c"> "شنقتني عبارتها فحدقت في تغضنات وجهها"</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-title">11. السؤال الوحيد الذي كان يهتم به الزوج خلال فترة الحمل هو:</div>
+            <div class="options">
+                <label><input type="radio" name="q11" value="a"> كيف تشعرين اليوم؟</label>
+                <label><input type="radio" name="q11" value="b"> هل تناولت الدواء؟</label>
+                <label><input type="radio" name="q11" value="c"> ولد أم بنت؟</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-title">12. موقف الراوية من نظام الأرقام الجديد في المستشفى كان:</div>
+            <div class="options">
+                <label><input type="radio" name="q12" value="a"> معارضة له وترى أنه يؤخر الناس</label>
+                <label><input type="radio" name="q12" value="b"> مؤيدة له وترى أنه أفضل لمن لا يقوى على الزحام</label>
+                <label><input type="radio" name="q12" value="c"> غير مهتمة إطلاقاً</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-title">13. المعنى المراد بكلمة "إقصاء" في قولها "أحاول إقصاءه عن تفكيري":</div>
+            <div class="options">
+                <label><input type="radio" name="q13" value="a"> إبعاده واستبعاده</label>
+                <label><input type="radio" name="q13" value="b"> تقريبه والتفكير فيه</label>
+                <label><input type="radio" name="q13" value="c"> الاحتفاظ به</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-title">14. علقت العجوز بتهكم عندما رأت المرأة ورجلها يسيران معاً بقولها:</div>
+            <div class="options">
+                <label><input type="radio" name="q14" value="a"> ما أجمل هذا المشهد!</label>
+                <label><input type="radio" name="q14" value="b"> وين احنا؟ في باريس!</label>
+                <label><input type="radio" name="q14" value="c"> الله يحفظهما لبعضهما.</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-title">15. يرمز عنوان القصة "علامة تعجب" إلى:</div>
+            <div class="options">
+                <label><input type="radio" name="q15" value="a"> الدهشة والاستنكار من واقع الجفاف العاطفي والنظرة المجتمعية للود بين الزوجين</label>
+                <label><input type="radio" name="q15" value="b"> السؤال عن مكان المستشفى</label>
+                <label><input type="radio" name="q15" value="c"> الإعجاب بنظام صرف الأدوية الجديد</label>
+            </div>
+        </div>
+
+        <!-- الجزء الثاني: صح وخطأ -->
+        <div class="section-title">ثانياً: أسئلة الصواب والخطأ (3 أسئلة)</div>
+
+        <div class="question-card">
+            <div class="question-title">16. كان الزوج حريصاً على مرافقة زوجته الحامل في كافة الفحوصات الطبية الشهرية.</div>
+            <div class="options">
+                <label><input type="radio" name="q16" value="false"> صواب</label>
+                <label><input type="radio" name="q16" value="true"> خطأ</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-title">17. أظهرت شخصية العجوز تقبلاً واستحساناً للمظاهر العاطفية بين الأزواج في الأماكن العامة.</div>
+            <div class="options">
+                <label><input type="radio" name="q17" value="false"> صواب</label>
+                <label><input type="radio" name="q17" value="true"> خطأ</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-title">18. نجحت الكاتبة في توظيف تقنية الوصف والحوار القصير لإبراز المشاعر الداخلية للشخصيات.</div>
+            <div class="options">
+                <label><input type="radio" name="q18" value="true"> صواب</label>
+                <label><input type="radio" name="q18" value="false"> خطأ</label>
+            </div>
+        </div>
+
+        <!-- الجزء الثالث: أسئلة التحليل -->
+        <div class="section-title">ثالثاً: أسئلة التحليل والأداء الكتابي (سؤالان)</div>
+
+        <div class="question-card">
+            <div class="question-title">19. حلل دور شخصية "المرأة العجوز" في القصة؛ كيف أسهمت في تعميق شعور البطلة بالوحدة والجفاف العاطفي؟</div>
+            <textarea id="q19" placeholder="اكتب تحليل نقدي مبسط هنا..." required></textarea>
+        </div>
+
+        <div class="question-card">
+            <div class="question-title">20. بالاستناد إلى حديث الرسول ﷺ: "خيركم خيركم لأهله"، قارن بين السلوك المأمول من الزوج والموقف السلبي لزوج البطلة في القصة.</div>
+            <textarea id="q20" placeholder="اكتب وجهة نظرك بالتفصيل هنا..." required></textarea>
+        </div>
+
+        <button type="button" class="submit-btn" onclick="submitWorksheet()">تسليم ورقة العمل وإنشاء الشهادة</button>
+    </form>
+
+    <!-- منطقة الشهادة -->
+    <div id="certificate">
+        <div class="cert-header">🎓 شهادة إتمام واجب تفاعلي 🎓</div>
+        <div class="cert-body">
+            تشهد أستاذة المادة بأن الطالب/ـة: <span id="cert-name" class="cert-highlight">---</span><br>
+            من الشعبة/الصف: <span id="cert-class" class="cert-highlight">---</span><br>
+            قد أتم/ت بنجاح حل ورقة عمل درس: <strong>"علامة تعجب - قصة قصيرة"</strong><br>
+            وحصل/ت على درجة قدرها: <span id="cert-score" class="cert-highlight">---</span> / 100
+        </div>
+        <div class="cert-footer">
+            <div>
+                <strong>التاريخ:</strong><br>
+                <span id="cert-date">--/--/----</span>
+            </div>
+            <div class="signature">
+                <strong>معلمة المادة:</strong>
+                <div class="sig-line">لبنى خاي (Khayi)</div>
+                <small>مدرسة اللغة العربية</small>
+            </div>
+        </div>
+        <button class="print-btn" onclick="window.print()">طباعة الشهادة / حفظ PDF</button>
+    </div>
+</div>
+
+<script>
+    function submitWorksheet() {
+        const name = document.getElementById('student-name').value.trim();
+        const studentClass = document.getElementById('student-class').value.trim();
+        const q19 = document.getElementById('q19').value.trim();
+        const q20 = document.getElementById('q20').value.trim();
+
+        if (!name || !studentClass) {
+            alert('يرجى إدخال اسم الطالب والشعبة أولاً!');
+            return;
+        }
+
+        if (!q19 || !q20) {
+            alert('يرجى إجابة أسئلة التحليل والأداء الكتابي قبل التسليم!');
+            return;
+        }
+
+        // الأجوبة الصحيحة
+        const answers = {
+            q1: 'b',
+            q2: 'b',
+            q3: 'b',
+            q4: 'a',
+            q5: 'b',
+            q6: 'a',
+            q7: 'a',
+            q8: 'b',
+            q9: 'a',
+            q10: 'b',
+            q11: 'c',
+            q12: 'b',
+            q13: 'a',
+            q14: 'b',
+            q15: 'a',
+            q16: 'true',
+            q17: 'true',
+            q18: 'true'
+        };
+
+        let score = 0;
+        const totalMcqTrueFalse = 18; // 15 MCQ + 3 T/F
+        
+        // توزيع الدرجات: 18 سؤال مغلق = 72 درجة (4 درجات لكل سؤال)، وسؤالا التحليل = 28 درجة (14 لكل سؤال عند التعبئة)
+        for (let i = 1; i <= 18; i++) {
+            const qName = 'q' + i;
+            const selected = document.querySelector(`input[name="${qName}"]:checked`);
+            if (selected && selected.value === answers[qName]) {
+                score += 4; // 18 * 4 = 72 marks
+            }
+        }
+
+        // إضافة درجات التفكير والتحليل التلقائية عند الكتابة المستوفاة
+        if (q19.length > 10) score += 14;
+        if (q20.length > 10) score += 14;
+
+        // إظهار الشهادة وتحديث البيانات
+        document.getElementById('cert-name').innerText = name;
+        document.getElementById('cert-class').innerText = studentClass;
+        document.getElementById('cert-score').innerText = score;
+        
+        const today = new Date();
+        document.getElementById('cert-date').innerText = today.toLocaleDateString('ar-EG');
+
+        document.getElementById('certificate').style.display = 'block';
+        document.getElementById('certificate').scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
